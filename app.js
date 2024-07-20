@@ -74,12 +74,6 @@ const getRemainingTime = () => {
   let minutes = Math.floor((remainingTime % oneHour) / oneMinute);
   let seconds = Math.floor((remainingTime % oneMinute) / 1000);
 
-  if (remainingTime < 0) {
-    clearInterval(count);
-    deadline.innerHTML = `<h3>Le concours est terminé</h3>`;
-    return;
-  }
-
   const values = [days, hours, minutes, seconds];
   function format(item) {
     if (item < 10) {
@@ -91,6 +85,12 @@ const getRemainingTime = () => {
   items.forEach(function (item, index) {
     item.textContent = format(values[index]);
   });
+
+  if (remainingTime < 0) {
+    clearInterval(count);
+    deadline.innerHTML = `<h3>Le concours est terminé</h3>`;
+    return;
+  }
 };
 
 let count = setInterval(getRemainingTime, 1000);
